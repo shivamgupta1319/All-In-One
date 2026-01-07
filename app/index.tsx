@@ -15,6 +15,7 @@ export default function HomeScreen() {
         { name: 'Secrets', icon: 'lock-closed', route: '/secrets', color: '#6366F1' },
         { name: 'Finance', icon: 'wallet', route: '/finance', color: '#10B981' },
         { name: 'Notes', icon: 'document-text', route: '/notes', color: '#F59E0B' },
+        { name: 'Bills', icon: 'receipt', route: '/bills', color: '#EC4899' },
         { name: 'Settings', icon: 'settings', route: '/settings', color: '#64748B' },
     ];
 
@@ -38,11 +39,7 @@ export default function HomeScreen() {
                             key={mod.name}
                             style={[styles.moduleCard, { backgroundColor: theme.card, borderColor: theme.border }]}
                             onPress={() => {
-                                if (mod.route === '/finance' || mod.route === '/notes' || mod.route === '/settings' || mod.route === '/secrets' || mod.route === '/bills') {
-                                    router.push(mod.route as any);
-                                } else {
-                                    alert('Feature coming soon!');
-                                }
+                                router.push(mod.route as any);
                             }}
                         >
                             <View style={[styles.iconBox, { backgroundColor: `${mod.color}20` }]}>
