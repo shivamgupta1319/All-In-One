@@ -104,7 +104,7 @@ export default function DebtsScreen() {
                     styles.amount,
                     { color: item.amount > 0 ? '#10B981' : '#EF4444' }
                 ]}>
-                    {item.amount > 0 ? 'Owes you' : 'You owe'} ${Math.abs(item.amount).toFixed(2)}
+                    {item.amount > 0 ? 'Owes you' : 'You owe'} ₹{Math.abs(item.amount).toFixed(2)}
                 </Text>
             </View>
 

@@ -13,7 +13,6 @@ export const initDB = async () => {
         await db.execAsync(SCHEMA.secrets);
         await db.execAsync(SCHEMA.transactions);
         await db.execAsync(SCHEMA.debts);
-        await db.execAsync(SCHEMA.debts);
         await db.execAsync(SCHEMA.notes);
         await db.execAsync(SCHEMA.bills);
         await db.execAsync(SCHEMA.bill_items);

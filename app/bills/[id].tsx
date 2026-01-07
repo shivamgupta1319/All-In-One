@@ -169,7 +169,7 @@ export default function BillDetails() {
                             </View>
                             <View style={{ alignItems: 'flex-end' }}>
                                 <Text style={[styles.label, { color: theme.icon }]}>Total</Text>
-                                <Text style={[styles.valueLarge, { color: theme.tint }]}>${bill.total_amount.toFixed(2)}</Text>
+                                <Text style={[styles.valueLarge, { color: theme.tint }]}>₹{bill.total_amount.toFixed(2)}</Text>
                             </View>
                         </View>
                         <Text style={[styles.date, { color: theme.icon }]}>{bill.date}</Text>
@@ -202,11 +202,11 @@ export default function BillDetails() {
                                     <View style={{ flex: 1 }}>
                                         <Text style={[styles.itemDesc, { color: theme.text }]}>{item.description}</Text>
                                         <Text style={[styles.itemSub, { color: theme.icon }]}>
-                                            {item.quantity} x ${item.unit_price.toFixed(2)}
+                                            {item.quantity} x ₹{item.unit_price.toFixed(2)}
                                         </Text>
                                     </View>
                                     <View style={{ alignItems: 'flex-end' }}>
-                                        <Text style={[styles.itemTotal, { color: theme.text }]}>${item.total_price.toFixed(2)}</Text>
+                                        <Text style={[styles.itemTotal, { color: theme.text }]}>₹{item.total_price.toFixed(2)}</Text>
                                         <TouchableOpacity onPress={() => deleteItem(item.id)}>
                                             <Text style={{ color: '#EF4444', fontSize: 12, marginTop: 4 }}>Remove</Text>
                                         </TouchableOpacity>

@@ -54,28 +54,39 @@ export default function UploadBill() {
             setIsSubmitting(true);
             const result = await TextRecognition.recognize(uri, TextRecognitionScript.LATIN);
 
-            // Simple specific logic: Look for "Total" or currency symbols
-            // This is basic. Real regex would be more complex.
             const lines = result.text.split('\n');
             let foundTotal = '';
 
+            // Keywords to prioritize final amounts
+            const amountKeywords = ['total', 'grand total', 'amount due', 'amount', 'balance', 'pay', 'net', 'due', 'cash'];
+
+            // Regex to find currency amounts: 
+            // Supports: $10.00, 10.00, 1,000.00, 100
+            // Captures the numeric part group(1)
+            const currencyRegex = /[\$€£₹]?\s?(\d{1,3}(?:,\d{3})*(?:\.\d{1,2})?)/;
+
             for (let i = 0; i < lines.length; i++) {
                 const line = lines[i].toLowerCase();
-                if (line.includes('total') || line.includes('amount') || line.includes('$') || line.includes('due')) {
-                    // Try to extract numbers
-                    const matches = lines[i].match(/(\d+\.\d{2})/);
-                    if (matches) {
-                        foundTotal = matches[0];
-                        break;
+
+                // Check if line contains any interesting keyword
+                if (amountKeywords.some(keyword => line.includes(keyword))) {
+                    const matches = lines[i].match(currencyRegex);
+                    if (matches && matches[1]) {
+                        // Remove commas for storage
+                        const cleanAmount = matches[1].replace(/,/g, '');
+                        const parsed = parseFloat(cleanAmount);
+
+                        // Heuristic: Prefer later matches (often totals are at bottom)
+                        if (!isNaN(parsed) && parsed > 0) {
+                            foundTotal = cleanAmount;
+                        }
                     }
                 }
             }
 
             if (foundTotal) setTotal(foundTotal);
 
-            // Try to guess merchant from the first few lines?
             if (lines.length > 0 && !merchant) {
-                // First non-empty line usually merchant
                 const possibleMerchant = lines.find(l => l.trim().length > 3) || '';
                 setMerchant(possibleMerchant.trim());
             }

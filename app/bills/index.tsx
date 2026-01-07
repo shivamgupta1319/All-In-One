@@ -60,7 +60,7 @@ export default function BillsList() {
                 </Text>
                 <Text style={[styles.date, { color: theme.icon }]}>{item.date || 'No Date'}</Text>
                 <Text style={[styles.amount, { color: theme.tint }]}>
-                    {item.total_amount ? `$${item.total_amount.toFixed(2)}` : '-'}
+                    {item.total_amount ? `₹${item.total_amount.toFixed(2)}` : '-'}
                 </Text>
             </View>
         </TouchableOpacity>

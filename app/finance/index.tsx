@@ -82,7 +82,7 @@ export default function FinanceDashboard() {
                 styles.transactionAmount,
                 { color: item.type === 'INCOME' ? "#10B981" : "#EF4444" }
             ]}>
-                {item.type === 'INCOME' ? '+' : '-'}${item.amount.toFixed(2)}
+                {item.type === 'INCOME' ? '+' : '-'}₹{item.amount.toFixed(2)}
             </Text>
         </View>
     );
@@ -91,15 +91,15 @@ export default function FinanceDashboard() {
         <View style={[styles.container, { backgroundColor: theme.background }]}>
             <View style={[styles.balanceCard, { backgroundColor: theme.tint }]}>
                 <Text style={styles.balanceLabel}>Total Balance</Text>
-                <Text style={styles.balanceValue}>${balance.toFixed(2)}</Text>
+                <Text style={styles.balanceValue}>₹{balance.toFixed(2)}</Text>
                 <View style={styles.statsRow}>
                     <View style={styles.stat}>
                         <Ionicons name="arrow-down-circle" size={20} color="#fff" />
-                        <Text style={styles.statValue}>${income.toFixed(2)}</Text>
+                        <Text style={styles.statValue}>₹{income.toFixed(2)}</Text>
                     </View>
                     <View style={styles.stat}>
                         <Ionicons name="arrow-up-circle" size={20} color="#fff" />
-                        <Text style={styles.statValue}>${expense.toFixed(2)}</Text>
+                        <Text style={styles.statValue}>₹{expense.toFixed(2)}</Text>
                     </View>
                 </View>
             </View>
